@@ -74,12 +74,31 @@
         .chrome-icon img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
         .card h3 { font-size: 1.8rem; margin-bottom: 15px; }
         .card p { color: var(--text-muted); font-size: 0.95rem; }
-        .premium-offer { margin-top: 50px; background: linear-gradient(145deg, rgba(20,20,20,1) 0%, rgba(10,10,10,1) 100%); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 20px; padding: 60px; position: relative; overflow: hidden; }
-        .premium-offer::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80%; height: 1px; background: linear-gradient(90deg, transparent, #a855f7, transparent); }
+        
+        /* =========================================
+           ANIMATION BORDURES LUMINEUSES (NOVALAB & CTA)
+           ========================================= */
+        .premium-offer { margin-top: 50px; border-radius: 20px; padding: 60px; position: relative; overflow: hidden; }
+        .premium-offer::before, .final-cta-box::before { 
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; 
+            background: conic-gradient(from 0deg, transparent 75%, rgba(168, 85, 247, 0.2) 85%, #a855f7 95%, #38bdf8 100%); 
+            animation: border-rotate 4s linear infinite; z-index: 0; 
+        }
+        .premium-offer::after { content: ''; position: absolute; inset: 2px; background: linear-gradient(145deg, rgba(20,20,20,1) 0%, rgba(10,10,10,1) 100%); border-radius: 18px; z-index: 1; }
         .premium-offer-content { position: relative; z-index: 2; }
         .offer-list { list-style: none; margin: 30px 0 40px 0; }
         .offer-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 15px; color: #E2E8F0; }
         .offer-list li::before { content: ""; display: block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #a855f7; background: rgba(168, 85, 247, 0.2); }
+        
+        /* =========================================
+           SECTION INSTAGRAM
+           ========================================= */
+        .instagram-section { padding-bottom: 80px; }
+        .ig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 50px; justify-items: center; }
+        .ig-post-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 20px; width: 100%; max-width: 400px; transition: transform 0.3s ease, border-color 0.3s ease; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+        .ig-post-wrapper:hover { transform: translateY(-5px); border-color: rgba(168, 85, 247, 0.4); }
+        .ig-post-wrapper iframe { max-width: 100% !important; border-radius: 12px !important; }
+
         .testimonials-section { padding-bottom: 80px; }
         .carousel-wrapper { position: relative; max-width: 100%; margin: 0 auto; }
         .carousel-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 20px 0; -ms-overflow-style: none; scrollbar-width: none; }
@@ -113,11 +132,15 @@
         .faq-item.active .faq-icon::after { transform: rotate(90deg); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
         .faq-answer p { padding-bottom: 30px; color: var(--text-muted); line-height: 1.6; }
+        
         .final-cta-section { padding: 60px 0 100px 0; text-align: center; }
-        .final-cta-box { background: linear-gradient(145deg, rgba(20,20,20,1) 0%, rgba(10,10,10,1) 100%); border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 24px; padding: 80px 40px; position: relative; overflow: hidden; max-width: 900px; margin: 0 auto; box-shadow: 0 20px 50px rgba(107, 33, 168, 0.15); }
-        .final-cta-box::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 2px; background: linear-gradient(90deg, transparent, #a855f7, transparent); }
+        .final-cta-box { border-radius: 24px; padding: 80px 40px; position: relative; overflow: hidden; max-width: 900px; margin: 0 auto; box-shadow: 0 20px 50px rgba(107, 33, 168, 0.15); }
+        .final-cta-box::after { content: ''; position: absolute; inset: 2px; background: linear-gradient(145deg, rgba(20,20,20,1) 0%, rgba(10,10,10,1) 100%); border-radius: 22px; z-index: 1; }
+        .final-cta-box > * { position: relative; z-index: 2; }
         .final-cta-box h2 { font-size: 2.8rem; margin-bottom: 20px; }
         .final-cta-box p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 40px auto; }
+
+        @keyframes border-rotate { 100% { transform: rotate(360deg); } }
         
         /* =========================================
            POP-UP MULTI-ÉTAPES (SETTER AUTOMATIQUE)
@@ -168,6 +191,17 @@
             .cards-grid { grid-template-columns: 1fr; } .carousel-card { flex: 0 0 280px; } .faq-question { font-size: 1.1rem; padding: 25px 0; } .final-cta-box { padding: 50px 20px; } .final-cta-box h2 { font-size: 2rem; }
             .modal-content { padding: 30px 20px; } .form-step h3 { font-size: 1.3rem; } .row-inputs { flex-direction: column; gap: 0; }
         }
+
+        /* =========================================
+           STYLE DU MENU MOBILE
+           ========================================= */
+        .mobile-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 9998; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .close-menu-btn { position: absolute; top: 30px; right: 30px; background: none; border: none; color: var(--text-muted); font-size: 3rem; cursor: pointer; transition: color 0.3s; z-index: 9999; }
+        .close-menu-btn:hover { color: #fff; }
+        .mobile-menu-nav { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; text-align: center; }
+        .mobile-nav-link { color: var(--text-muted); font-size: 1.8rem; text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
+        .mobile-nav-link:hover { color: #fff; transform: translateY(-2px); text-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
     </style>
 </head>
 <body>
@@ -177,7 +211,7 @@
     <div class="container">
         <header class="fade-in-up">
             <div class="logo">NOVALAB</div>
-            <div style="cursor: pointer;">
+            <div id="burger-btn" style="cursor: pointer;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </div>
         </header>
@@ -213,7 +247,7 @@
 
         <section id="about">
             <div class="about-grid">
-                <div class="about-image"><span style="color: var(--text-muted); font-size: 0.9rem; text-align: center; padding: 20px;">[Insère ta photo ici]<br><br><small>Remplace ce bloc par une balise &lt;img&gt;</small></span></div>
+                <div class="about-image"><img src="photo-yanis.webp" alt="Yanis Benali" style="width: 100%; height: 100%; object-fit: cover;"></div>
                 <div class="about-content">
                     <span class="sur-titre">Derrière NovaLab</span><h2>Moi, c'est <span class="serif-italic">Yanis Benali</span>.</h2>
                     <p>Il y a quelques années, j'étais exactement là où tu es aujourd'hui : plein d'ambition, mais noyé dans un océan d'informations contradictoires. J'ai testé, j'ai fait des erreurs, et j'ai finalement fini par craquer les codes de l'écosystème digital.</p>
@@ -231,6 +265,7 @@
                 <div class="card"><div class="card-top"><span class="card-tag">Effet de levier</span><div class="chrome-icon"></div></div><h3>Partenariat & <span class="serif-italic">Affiliation</span></h3><p>Pas encore de produit ? Intègre l'écosystème en tant que partenaire NovaLab. Revends des produits et services à forte valeur ajoutée déjà validés par le marché pour générer tes revenus.</p></div>
                 <div class="card"><div class="card-top"><span class="card-tag">Réseau & Évolution</span><div class="chrome-icon"></div></div><h3>Communauté & <span class="serif-italic">Masterminds</span></h3><p>Ton réseau détermine ta valeur. Rejoins un cercle de jeunes ambitieux où l'entraide est la norme. Participe à nos événements exclusifs et propulse ton mindset vers la réussite.</p></div>
             </div>
+            
             <div class="premium-offer">
                 <div class="premium-offer-content">
                     <span class="card-tag" style="background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.4); color: #c084fc;">COMPLET • PROCHAINE SESSION EN APPROCHE</span>
@@ -242,15 +277,39 @@
             </div>
         </section>
 
+        <section id="instagram" class="instagram-section">
+            <div class="section-title fade-in-up">
+                <span class="sur-titre">Réseaux Sociaux</span>
+                <h2>Découvre la famille <span class="serif-italic">NovaLab</span></h2>
+                <p style="color: var(--text-muted); margin-top: 15px;">Plonge dans l'écosystème et découvre nos stratégies concrètes en action.</p>
+            </div>
+            
+            <div class="ig-grid fade-in-up delay-1">
+                <div class="ig-post-wrapper">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DXXWZrajPHO/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/DXXWZrajPHO/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">Voir cette publication sur Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/DXXWZrajPHO/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">Une publication partagée par NovaLab | L’écosystème digital 360° (@novalab.officiel)</a></p></div></blockquote>
+                </div>
+
+                <div class="ig-post-wrapper">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C8Foqm-NkPm/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/C8Foqm-NkPm/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">Voir cette publication sur Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/C8Foqm-NkPm/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">Une publication partagée par NovaLab | L’écosystème digital 360° (@novalab.officiel)</a></p></div></blockquote>
+                </div>
+
+                <div class="ig-post-wrapper">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DaF112SDECG/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/DaF112SDECG/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">Voir cette publication sur Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/DaF112SDECG/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">Une publication partagée par NovaLab | L’écosystème digital 360° (@novalab.officiel)</a></p></div></blockquote>
+                </div>
+            </div>
+            
+            <script async src="//www.instagram.com/embed.js"></script>
+        </section>
+
         <section id="temoignages" class="testimonials-section">
             <div class="section-title fade-in-up"><span class="sur-titre">Preuve sociale</span><h2>Ils ont fait confiance à <span class="serif-italic">NovaLab</span></h2></div>
             <div class="carousel-wrapper fade-in-up delay-1">
                 <div class="carousel-track" id="testimonial-track">
-                    <div class="carousel-card"><div class="card-header"><div class="quote-icon">"</div><div class="stars-container"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div><p>"Étudiante avec peu de moyens, je cherchais un complément de revenu. Grâce à l'accompagnement, j'ai lancé le marketing digital et aujourd'hui je génère mes premiers revenus en parallèle de mes études. Ça a changé ma vision."</p><div class="carousel-author-wrapper"><div class="author-avatar">Img</div><div class="carousel-author-info"><span class="author-name">Lina K.</span><span class="author-role">Étudiante & Ladyboss</span></div></div></div>
-                    <div class="carousel-card"><div class="card-header"><div class="quote-icon">"</div><div class="stars-container"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div><p>"J'étais étudiant et je voulais plus. J'a découvert le monde de la finance et avec le suivi et la méthode, j'ai enfin compris et aujourd'hui je suis rentable. C'est un vrai tournant pour moi."</p><div class="carousel-author-wrapper"><div class="author-avatar">Img</div><div class="carousel-author-info"><span class="author-name">Rayan C.</span><span class="author-role">Trader/Investisseur</span></div></div></div>
-                    <div class="carousel-card"><div class="card-header"><div class="quote-icon">"</div><div class="stars-container"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div><p>"Entre les études et le manque de repères, j'étais perdu. Aujourd'hui, je génère des revenus chaque mois grâce à l'UGC et au marketing digital. J'ai enfin un système qui fonctionne grâce à NovaLab."</p><div class="carousel-author-wrapper"><div class="author-avatar">Img</div><div class="carousel-author-info"><span class="author-name">Aladdin A.</span><span class="author-role">Créateur</span></div></div></div>
-                    <div class="carousel-card"><div class="card-header"><div class="quote-icon">"</div><div class="stars-container"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div><p>"Étudiante, j'ai lancé mon agence de graphisme et en parallèle je génère des revenus grâce au marketing digital avec les produits de l'écosystème. J'ai plusieurs sources de revenus maintenant."</p><div class="carousel-author-wrapper"><div class="author-avatar">Img</div><div class="carousel-author-info"><span class="author-name">Shola N.</span><span class="author-role">Étudiante & Ladyboss</span></div></div></div>
-                    <div class="carousel-card"><div class="card-header"><div class="quote-icon">"</div><div class="stars-container"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div><p>"Déscolarisé, je ne voyais pas d'issue. Aujourd'hui, je suis devenu partenaire NovaLab et je génère jusqu'à 3 000€/mois grâce au digital et à l'écosystème. C'est une transformation totale. Merci Yanis."</p><div class="carousel-author-wrapper"><div class="author-avatar">Img</div><div class="carousel-author-info"><span class="author-name">Oussama C.</span><span class="author-role">Entrepreneur</span></div></div></div>
+                    <div class="carousel-card"><div class="card-header"><div class="quote-icon">"</div><div class="stars-container"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div><p>"Étudiante avec peu de moyens, je cherchais un complément de revenu. Grâce à l'accompagnement, j'ai lancé le marketing digital et aujourd'hui je génère mes premiers revenus en parallèle de mes études. Ça a changé ma vision."</p><div class="carousel-author-wrapper"><div class="author-avatar"><img src="photo-lina.webp" alt="Lina K."></div><div class="carousel-author-info"><span class="author-name">Lina K.</span><span class="author-role">Étudiante & Ladyboss</span></div></div></div>
+                    <div class="carousel-card"><div class="card-header"><div class="quote-icon">"</div><div class="stars-container"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div><p>"J'étais étudiant et je voulais plus. J'a découvert le monde de la finance et avec le suivi et la méthode, j'ai enfin compris et aujourd'hui je suis rentable. C'est un vrai tournant pour moi."</p><div class="carousel-author-wrapper"><div class="author-avatar">R</div><div class="carousel-author-info"><span class="author-name">Rayan C.</span><span class="author-role">Trader/Investisseur</span></div></div></div>
+                    <div class="carousel-card"><div class="card-header"><div class="quote-icon">"</div><div class="stars-container"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div><p>"Entre les études et le manque de repères, j'étais perdu. Aujourd'hui, je génère des revenus chaque mois grâce à l'UGC et au marketing digital. J'ai enfin un système qui fonctionne grâce à NovaLab."</p><div class="carousel-author-wrapper"><div class="author-avatar"><img src="photo-aladdin.webp" alt="Aladdin A."></div><div class="carousel-author-info"><span class="author-name">Aladdin A.</span><span class="author-role">Créateur</span></div></div></div>
+                    <div class="carousel-card"><div class="card-header"><div class="quote-icon">"</div><div class="stars-container"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div><p>"Étudiante, j'ai lancé mon agence de graphisme et en parallèle je génère des revenus grâce au marketing digital avec les produits de l'écosystème. J'ai plusieurs sources de revenus maintenant."</p><div class="carousel-author-wrapper"><div class="author-avatar"><img src="photo-shola.webp" alt="Shola N."></div><div class="carousel-author-info"><span class="author-name">Shola N.</span><span class="author-role">Étudiante & Ladyboss</span></div></div></div>
+                    <div class="carousel-card"><div class="card-header"><div class="quote-icon">"</div><div class="stars-container"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div><p>"Déscolarisé, je ne voyais pas d'issue. Aujourd'hui, je suis devenu partenaire NovaLab et je génère jusqu'à 3 000€/mois grâce au digital et à l'écosystème. C'est une transformation totale. Merci Yanis."</p><div class="carousel-author-wrapper"><div class="author-avatar"><img src="photo-oussama.webp" alt="Oussama V."></div><div class="carousel-author-info"><span class="author-name">Oussama C.</span><span class="author-role">Entrepreneur</span></div></div></div>
                 </div>
                 <div class="carousel-controls">
                     <button class="carousel-btn" id="prev-btn" aria-label="Précédent"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
@@ -283,13 +342,23 @@
         </footer>
     </div>
 
-    <!-- LE MODAL POP-UP (SETTER AUTOMATISÉ 6 ÉTAPES) -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="close-menu-btn" id="close-menu-btn-hamburger">&times;</button>
+        <nav class="mobile-menu-nav">
+            <a href="#about" class="mobile-nav-link">À propos de moi</a>
+            <a href="#parcours" class="mobile-nav-link">Mon histoire</a>
+            <a href="#offres" class="mobile-nav-link">Mes expertises</a>
+            <a href="#instagram" class="mobile-nav-link">Réseaux Sociaux</a>
+            <a href="#faq" class="mobile-nav-link">FAQ</a>
+            <button class="btn btn-primary open-modal-btn mobile-menu-cta" style="margin-top: 20px;">Candidater au programme</button>
+        </nav>
+    </div>
+
     <div class="modal-overlay" id="application-modal">
         <div class="modal-content">
             <button class="close-modal" id="close-modal-btn">&times;</button>
             <div class="progress-container"><div class="progress-bar" id="modal-progress"></div></div>
 
-            <!-- Etape 0: Introduction -->
             <div class="form-step active" data-step="0">
                 <span class="sur-titre">Candidature NovaLab</span>
                 <h3>Nous ne travaillons qu'avec les meilleurs.</h3>
@@ -300,7 +369,6 @@
                 </div>
             </div>
 
-            <!-- Etape 1: Contact -->
             <div class="form-step" data-step="1">
                 <h3>Dis-nous en plus sur toi</h3>
                 <div class="row-inputs">
@@ -318,7 +386,6 @@
                 </div>
             </div>
 
-            <!-- Etape 2: Situation et Age -->
             <div class="form-step" data-step="2">
                 <h3>Ta situation actuelle</h3>
                 <div style="margin-bottom: 25px;">
@@ -338,7 +405,6 @@
                 </div>
             </div>
 
-            <!-- Etape 3: Niveau Business -->
             <div class="form-step" data-step="3">
                 <h3>Ton niveau en business</h3>
                 <p class="step-desc">Où en es-tu concrètement aujourd'hui ?</p>
@@ -352,7 +418,6 @@
                 </div>
             </div>
 
-            <!-- Etape 4: Mindset et Objectifs -->
             <div class="form-step" data-step="4">
                 <h3>Ta vision & Tes blocages</h3>
                 <div class="input-group">
@@ -373,7 +438,6 @@
                 </div>
             </div>
 
-            <!-- Etape 5: Finances (Finale) -->
             <div class="form-step" data-step="5">
                 <h3>Tes ressources</h3>
                 <p class="step-desc" style="font-size: 0.85rem; color: #a855f7;">💡 Aucune réponse ne te disqualifiera. Nous voulons juste cerner ton profil pour te proposer la solution la plus adaptée.</p>
@@ -429,18 +493,46 @@
             openBtns.forEach(btn => { btn.addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('active'); }); });
             closeBtn.addEventListener('click', () => { modal.classList.remove('active'); });
             modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+
+            // LOGIQUE DU MENU MOBILE
+            const burgerBtn = document.getElementById('burger-btn');
+            const closeMenuBtnHamburger = document.getElementById('close-menu-btn-hamburger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            const mobileCta = document.querySelector('.mobile-menu-cta');
+
+            if (burgerBtn) {
+                burgerBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            const closeMobileMenu = () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            };
+
+            if (closeMenuBtnHamburger) closeMenuBtnHamburger.addEventListener('click', closeMobileMenu);
+            mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+
+            if (mobileCta && modal) {
+                mobileCta.addEventListener('click', () => {
+                    closeMobileMenu();
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
         });
 
         // Navigation du Formulaire avec vérification
         function nextStep(currentStep) {
             const stepEl = document.querySelector(`.form-step[data-step="${currentStep}"]`);
             
-            // Vérification des champs requis (text, email, tel, textarea)
             const inputs = stepEl.querySelectorAll('input[required], textarea[required]');
             let allFilled = true;
             inputs.forEach(input => { if (!input.value.trim()) allFilled = false; });
             
-            // Vérification des boutons radio (si présents dans l'étape)
             const radios = stepEl.querySelectorAll('input[type="radio"]');
             if (radios.length > 0) {
                 const names = [...new Set(Array.from(radios).map(r => r.name))];
@@ -469,7 +561,6 @@
         }
 
         async function submitForm() {
-            // 1. Ultime vérification
             const stepEl = document.querySelector(`.form-step[data-step="5"]`);
             const radios = stepEl.querySelectorAll('input[type="radio"]');
             const names = [...new Set(Array.from(radios).map(r => r.name))];
@@ -481,46 +572,31 @@
                 return;
             }
 
-            // 2. Changer le texte du bouton pendant l'envoi pour faire patienter
             const submitBtn = document.querySelector(`.form-step[data-step="5"] .btn-next`);
             const originalText = submitBtn.innerText;
             submitBtn.innerText = "Envoi en cours...";
             submitBtn.disabled = true;
 
-            // 3. Récupération de TOUTES les données du formulaire
             const formData = {
-                // Etape 1 : Contact
-                prenom: document.querySelector('.form-step[data-step="1"] input[type="text"]:nth-child(2)').value, // Attention à l'index si tu as mis des IDs
+                prenom: document.querySelector('.form-step[data-step="1"] input[type="text"]:nth-child(2)').value,
                 nom: document.querySelectorAll('.form-step[data-step="1"] input[type="text"]')[1].value,
                 email: document.querySelector('.form-step[data-step="1"] input[type="email"]').value,
                 whatsapp: document.querySelector('.form-step[data-step="1"] input[type="tel"]').value,
                 instagram: document.querySelectorAll('.form-step[data-step="1"] input[type="text"]')[2].value,
-                
-                // Etape 2 : Situation
                 age: document.querySelector('input[name="age"]:checked').value,
                 activite: document.querySelector('.form-step[data-step="2"] textarea').value,
-                
-                // Etape 3 : Niveau
                 niveau: document.querySelector('input[name="niveau"]:checked').value,
-                
-                // Etape 4 : Mindset
                 pourquoi_maintenant: document.querySelectorAll('.form-step[data-step="4"] textarea')[0].value,
                 manque: document.querySelectorAll('.form-step[data-step="4"] textarea')[1].value,
                 objectif_90j: document.querySelectorAll('.form-step[data-step="4"] textarea')[2].value,
-                
-                // Etape 5 : Finances
                 revenu_mensuel: document.querySelector('input[name="revenu"]:checked').value,
                 capacite_investissement: document.querySelector('input[name="investissement"]:checked').value,
-                
-                // Date de la candidature
                 date: new Date().toISOString()
             };
 
-            // 4. L'URL DE TON WEBHOOK (À remplacer par l'URL que Make ou Zapier va te donner)
             const webhookURL = "https://hook.eu1.make.com/29rdkn1f3i3f1qonsdyq0miln1miudkq";
 
             try {
-                // 5. Envoi des données
                 const response = await fetch(webhookURL, {
                     method: "POST",
                     headers: {
@@ -533,7 +609,6 @@
                     alert("Félicitations ! Ta candidature a bien été envoyée à l'équipe NovaLab. Si ton profil est retenu, nous te contacterons sur WhatsApp sous 48h.");
                     document.getElementById('application-modal').classList.remove('active');
                     
-                    // Réinitialisation après envoi
                     setTimeout(() => {
                         document.querySelector('.form-step[data-step="5"]').classList.remove('active');
                         document.querySelector('.form-step[data-step="0"]').classList.add('active');
@@ -548,7 +623,6 @@
                 alert("Une erreur est survenue lors de l'envoi. Vérifie ta connexion internet ou réessaie plus tard.");
                 console.error(error);
             } finally {
-                // Remettre le bouton à son état normal
                 submitBtn.innerText = originalText;
                 submitBtn.disabled = false;
             }
