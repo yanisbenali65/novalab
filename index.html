@@ -468,8 +468,8 @@
             progress.style.width = `${(step / 5) * 100}%`;
         }
 
-        function submitForm() {
-            // Ultime vérification pour la dernière étape (étape 5)
+        async function submitForm() {
+            // 1. Ultime vérification
             const stepEl = document.querySelector(`.form-step[data-step="5"]`);
             const radios = stepEl.querySelectorAll('input[type="radio"]');
             const names = [...new Set(Array.from(radios).map(r => r.name))];
@@ -481,19 +481,77 @@
                 return;
             }
 
-            alert("Félicitations ! Ta candidature a bien été envoyée à l'équipe NovaLab. Si ton profil est retenu, nous te contacterons sur WhatsApp sous 48h.");
-            document.getElementById('application-modal').classList.remove('active');
-            
-            // Réinitialisation après envoi
-            setTimeout(() => {
-                document.querySelector('.form-step[data-step="5"]').classList.remove('active');
-                document.querySelector('.form-step[data-step="0"]').classList.add('active');
-                updateProgress(0);
-                // Vider les champs texte
-                document.querySelectorAll('#application-modal input[type="text"], #application-modal input[type="email"], #application-modal input[type="tel"], #application-modal textarea').forEach(input => input.value = '');
-                // Décocher les radios
-                document.querySelectorAll('#application-modal input[type="radio"]').forEach(radio => radio.checked = false);
-            }, 500);
+            // 2. Changer le texte du bouton pendant l'envoi pour faire patienter
+            const submitBtn = document.querySelector(`.form-step[data-step="5"] .btn-next`);
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = "Envoi en cours...";
+            submitBtn.disabled = true;
+
+            // 3. Récupération de TOUTES les données du formulaire
+            const formData = {
+                // Etape 1 : Contact
+                prenom: document.querySelector('.form-step[data-step="1"] input[type="text"]:nth-child(2)').value, // Attention à l'index si tu as mis des IDs
+                nom: document.querySelectorAll('.form-step[data-step="1"] input[type="text"]')[1].value,
+                email: document.querySelector('.form-step[data-step="1"] input[type="email"]').value,
+                whatsapp: document.querySelector('.form-step[data-step="1"] input[type="tel"]').value,
+                instagram: document.querySelectorAll('.form-step[data-step="1"] input[type="text"]')[2].value,
+                
+                // Etape 2 : Situation
+                age: document.querySelector('input[name="age"]:checked').value,
+                activite: document.querySelector('.form-step[data-step="2"] textarea').value,
+                
+                // Etape 3 : Niveau
+                niveau: document.querySelector('input[name="niveau"]:checked').value,
+                
+                // Etape 4 : Mindset
+                pourquoi_maintenant: document.querySelectorAll('.form-step[data-step="4"] textarea')[0].value,
+                manque: document.querySelectorAll('.form-step[data-step="4"] textarea')[1].value,
+                objectif_90j: document.querySelectorAll('.form-step[data-step="4"] textarea')[2].value,
+                
+                // Etape 5 : Finances
+                revenu_mensuel: document.querySelector('input[name="revenu"]:checked').value,
+                capacite_investissement: document.querySelector('input[name="investissement"]:checked').value,
+                
+                // Date de la candidature
+                date: new Date().toISOString()
+            };
+
+            // 4. L'URL DE TON WEBHOOK (À remplacer par l'URL que Make ou Zapier va te donner)
+            const webhookURL = "https://hook.eu1.make.com/29rdkn1f3i3f1qonsdyq0miln1miudkq";
+
+            try {
+                // 5. Envoi des données
+                const response = await fetch(webhookURL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if(response.ok) {
+                    alert("Félicitations ! Ta candidature a bien été envoyée à l'équipe NovaLab. Si ton profil est retenu, nous te contacterons sur WhatsApp sous 48h.");
+                    document.getElementById('application-modal').classList.remove('active');
+                    
+                    // Réinitialisation après envoi
+                    setTimeout(() => {
+                        document.querySelector('.form-step[data-step="5"]').classList.remove('active');
+                        document.querySelector('.form-step[data-step="0"]').classList.add('active');
+                        updateProgress(0);
+                        document.querySelectorAll('#application-modal input[type="text"], #application-modal input[type="email"], #application-modal input[type="tel"], #application-modal textarea').forEach(input => input.value = '');
+                        document.querySelectorAll('#application-modal input[type="radio"]').forEach(radio => radio.checked = false);
+                    }, 500);
+                } else {
+                    throw new Error("Erreur serveur");
+                }
+            } catch (error) {
+                alert("Une erreur est survenue lors de l'envoi. Vérifie ta connexion internet ou réessaie plus tard.");
+                console.error(error);
+            } finally {
+                // Remettre le bouton à son état normal
+                submitBtn.innerText = originalText;
+                submitBtn.disabled = false;
+            }
         }
     </script>
 </body>
